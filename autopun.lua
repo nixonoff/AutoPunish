@@ -19,10 +19,10 @@ local notf_chat= true
 local active_forma = false
 local stop_forma = false
 
-local update_url = "https://raw.githubusercontent.com/nixonoff/script/master/update.ini"
+local update_url = "https://raw.githubusercontent.com/nixonoff/AutoPunish/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
 
-local script_url = "https://raw.githubusercontent.com/nixonoff/script/master/script.lua"
+local script_url = "https://raw.githubusercontent.com/nixonoff/AutoPunish/main/autopun.lua"
 local script_path = thisScript().path
 
 function main()
