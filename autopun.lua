@@ -22,7 +22,7 @@ local stop_forma = false
 local update_url = "https://raw.githubusercontent.com/nixonoff/AutoPunish/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
 
-local script_url = ""
+local script_url = "https://raw.githubusercontent.com/nixonoff/AutoPunish/main/autopun.lua"
 local script_path = thisScript().path
 
 function main()
@@ -33,7 +33,7 @@ function main()
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateini = inicfg.load(nil, update_path)
             if tonumber(updateini.info.vers) > script_vers then 
-                message("Найдено обновление. Версия:{FFA500} "..updateini.info.vers_text)
+                message("ГЌГ Г©Г¤ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. Г‚ГҐГ°Г±ГЁГї:{FFA500} "..updateini.info.vers_text)
                 update_state = true
             end
             if tonumber(updateini.info.vers) <= script_vers and not update_state then
@@ -49,7 +49,7 @@ function main()
         if update_state then
 			downloadUrlToFile(script_url, script_path, function (id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-					message("Обновление успешно установлено.")
+					message("ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГіГ±ГЇГҐГёГ­Г® ГіГ±ГІГ Г­Г®ГўГ«ГҐГ­Г®.")
 					update_state = false
 					thisScript():reload()
 				end
@@ -97,9 +97,9 @@ function sampev.onServerMessage(color, text)
                     lua_thread.create(function()
                         wait(100)
                         adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                        text = string.format("Администратор %s[%d] хочет изменить HP игроку {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                        text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГЁГ§Г¬ГҐГ­ГЁГІГј HP ГЁГЈГ°Г®ГЄГі {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                         message(text)
-                        message("Нажмите клавишу подтверждения.")
+                        message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                         lasttime = os.time()
                         lasttimes = 0
                         time_out = 15
@@ -108,21 +108,21 @@ function sampev.onServerMessage(color, text)
                             wait(0)
                             active_forma = true
                             if stop_forma then
-                                message("Команду выполнил другой администратор.")
+                                message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                 stop_forma = false
                                 break
                             end
                             if lasttimes == time_out then
-                                message("Время ожидания истекло.")
+                                message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                             end
                             local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                             local adm_name = string.match(adm_name, "%a+")
                             if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                 adm_nick = first_name.. ". "..last_name
-                                sampSendChat("/hp "..adm_chat_cmd_player_id.." "..adm_chat_cmd_player_val.." • "..adm_nick)
+                                sampSendChat("/hp "..adm_chat_cmd_player_id.." "..adm_chat_cmd_player_val.." вЂў "..adm_nick)
                                 wait(200)
-                                sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                                --sampSendChat("/ans "..adm_chat_cmd_player_id.. " HP выдано по просьбе администратора "..adm_name)
+                                sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                                --sampSendChat("/ans "..adm_chat_cmd_player_id.. " HP ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name)
                                 active_forma = false
                                 break
                             end
@@ -143,9 +143,9 @@ function sampev.onServerMessage(color, text)
                         lua_thread.create(function()
                             wait(100)
                             adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                            text = string.format("Администратор %s[%d] хочет поставить затычку игроку {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                            text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГЇГ®Г±ГІГ ГўГЁГІГј Г§Г ГІГ»Г·ГЄГі ГЁГЈГ°Г®ГЄГі {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                             message(text)
-                            message("Нажмите клавишу подтверждения.")
+                            message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                             lasttime = os.time()
                             lasttimes = 0
                             time_out = 15
@@ -154,22 +154,22 @@ function sampev.onServerMessage(color, text)
                                 wait(0)
                                 active_forma = true
                                 if stop_forma then
-                                    message("Команду выполнил другой администратор.")
+                                    message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                     stop_forma = false
                                     break
                                 end
                                 if lasttimes == time_out then
-                                    message("Время ожидания истекло.")
+                                    message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                                 end
                                 local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                                 local adm_name = string.match(adm_name, "%a+")
                                 if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                     adm_nick = first_name.. ". "..last_name
-                                    new_reason_mute = reason_mute .. " • " ..adm_nick
+                                    new_reason_mute = reason_mute .. " вЂў " ..adm_nick
                                     sampSendChat("/mute "..adm_chat_cmd_player_id.." "..term.." "..new_reason_mute)
                                     wait(200)
-                                    sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." Наказание выдано по просьбе администратора "..adm_name..".")
+                                    sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." ГЌГ ГЄГ Г§Г Г­ГЁГҐ ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name..".")
                                     active_forma = false
                                     break
                                 end
@@ -191,9 +191,9 @@ function sampev.onServerMessage(color, text)
                         lua_thread.create(function()
                             wait(100)
                             adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                            text = string.format("Администратор %s[%d] хочет забанить игрока {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                            text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ Г§Г ГЎГ Г­ГЁГІГј ГЁГЈГ°Г®ГЄГ  {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                             message(text)
-                            message("Нажмите клавишу подтверждения.")
+                            message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                             lasttime = os.time()
                             lasttimes = 0
                             time_out = 15
@@ -202,22 +202,22 @@ function sampev.onServerMessage(color, text)
                                 wait(0)
                                 active_forma = true
                                 if stop_forma then
-                                    message("Команду выполнил другой администратор.")
+                                    message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                     stop_forma = false
                                     break
                                 end
                                 if lasttimes == time_out then
-                                    message("Время ожидания истекло.")
+                                    message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                                 end
                                 local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                                 local adm_name = string.match(adm_name, "%a+")
                                 if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                     adm_nick = first_name.. ". "..last_name
-                                    new_reason_ban = reason_ban .. " • " ..adm_nick
+                                    new_reason_ban = reason_ban .. " вЂў " ..adm_nick
                                     sampSendChat("/ban "..adm_chat_cmd_player_id.." "..term.." "..new_reason_ban)
                                     wait(200)
-                                    sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." Наказание выдано по просьбе администратора "..adm_name..".")
+                                    sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." ГЌГ ГЄГ Г§Г Г­ГЁГҐ ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name..".")
                                     active_forma = false
                                     break
                                 end
@@ -240,9 +240,9 @@ function sampev.onServerMessage(color, text)
                         lua_thread.create(function()
                             wait(100)
                             adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                            text = string.format("Администратор %s[%d] хочет посадить в тюрьму игрока {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                            text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГЇГ®Г±Г Г¤ГЁГІГј Гў ГІГѕГ°ГјГ¬Гі ГЁГЈГ°Г®ГЄГ  {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                             message(text)
-                            message("Нажмите клавишу подтверждения.")
+                            message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                             lasttime = os.time()
                             lasttimes = 0
                             time_out = 15
@@ -251,22 +251,22 @@ function sampev.onServerMessage(color, text)
                                 wait(0)
                                 active_forma = true
                                 if stop_forma then
-                                    message("Команду выполнил другой администратор.")
+                                    message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                     stop_forma = false
                                     break
                                 end
                                 if lasttimes == time_out then
-                                    message("Время ожидания истекло.")
+                                    message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                                 end
                                 local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                                 local adm_name = string.match(adm_name, "%a+")
                                 if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                     adm_nick = first_name.. ". "..last_name
-                                    new_reason_jail = reason_jail .. " • " ..adm_nick
+                                    new_reason_jail = reason_jail .. " вЂў " ..adm_nick
                                     sampSendChat("/prison "..adm_chat_cmd_player_id.." "..term.." "..new_reason_jail)
                                     wait(200)
-                                    sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." Наказание выдано по просьбе администратора "..adm_name..".")
+                                    sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." ГЌГ ГЄГ Г§Г Г­ГЁГҐ ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name..".")
                                     active_forma = false
                                     break
                                 end
@@ -287,9 +287,9 @@ function sampev.onServerMessage(color, text)
                         lua_thread.create(function()
                             wait(100)
                             adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                            text = string.format("Администратор %s[%d] хочет выдать предупреждение игроку {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                            text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГўГ»Г¤Г ГІГј ГЇГ°ГҐГ¤ГіГЇГ°ГҐГ¦Г¤ГҐГ­ГЁГҐ ГЁГЈГ°Г®ГЄГі {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                             message(text)
-                            message("Нажмите клавишу подтверждения.")
+                            message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                             lasttime = os.time()
                             lasttimes = 0
                             time_out = 15
@@ -298,22 +298,22 @@ function sampev.onServerMessage(color, text)
                                 wait(0)
                                 active_forma = true
                                 if stop_forma then
-                                    message("Команду выполнил другой администратор.")
+                                    message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                     stop_forma = false
                                     break
                                 end
                                 if lasttimes == time_out then
-                                    message("Время ожидания истекло.")
+                                    message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                                 end
                                 local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                                 local adm_name = string.match(adm_name, "%a+")
                                 if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                     adm_nick = first_name.. ". "..last_name
-                                    new_reason_warn = reason_warn .. " • " ..adm_nick
+                                    new_reason_warn = reason_warn .. " вЂў " ..adm_nick
                                     sampSendChat("/warn "..adm_chat_cmd_player_id.." "..new_reason_warn)
                                     wait(200)
-                                    sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." Наказание выдано по просьбе администратора "..adm_name..".")
+                                    sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                                    --sampSendChat("/ans "..adm_chat_cmd_player_id.." ГЌГ ГЄГ Г§Г Г­ГЁГҐ ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name..".")
                                     active_forma = false
                                     break
                                 end
@@ -333,9 +333,9 @@ function sampev.onServerMessage(color, text)
                     lua_thread.create(function()
                         wait(100)
                         adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                        text = string.format("Администратор %s[%d] хочет кикнуть игрока {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                        text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГЄГЁГЄГ­ГіГІГј ГЁГЈГ°Г®ГЄГ  {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                         message(text)
-                        message("Нажмите клавишу подтверждения.")
+                        message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                         lasttime = os.time()
                         lasttimes = 0
                         time_out = 15
@@ -344,22 +344,22 @@ function sampev.onServerMessage(color, text)
                             wait(0)
                             active_forma = true
                             if stop_forma then
-                                message("Команду выполнил другой администратор.")
+                                message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                 stop_forma = false
                                 break
                             end
                             if lasttimes == time_out then
-                                message("Время ожидания истекло.")
+                                message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                             end
                             local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                             local adm_name = string.match(adm_name, "%a+")
                             if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                 adm_nick = first_name.. ". "..last_name
-                                new_reason_kick = reason_kick .. " • " ..adm_nick
+                                new_reason_kick = reason_kick .. " вЂў " ..adm_nick
                                 sampSendChat("/kick "..adm_chat_cmd_player_id.." "..new_reason_kick)
                                 wait(200)
-                                sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                                --sampSendChat("/ans "..adm_chat_cmd_player_id.." Наказание выдано по просьбе администратора "..adm_name..".")
+                                sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                                --sampSendChat("/ans "..adm_chat_cmd_player_id.." ГЌГ ГЄГ Г§Г Г­ГЁГҐ ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name..".")
                                 active_forma = false
                                 break
                             end
@@ -375,9 +375,9 @@ function sampev.onServerMessage(color, text)
                 active_forma = true
                     lua_thread.create(function()
                         wait(100)
-                        text = string.format("Администратор %s[%d] хочет сделать объявление.", adm_name, adm_id)
+                        text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ Г±Г¤ГҐГ«Г ГІГј Г®ГЎГєГїГўГ«ГҐГ­ГЁГҐ.", adm_name, adm_id)
                         message(text)
-                        message("Нажмите клавишу подтверждения <K>.")
+                        message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї <K>.")
                         lasttime = os.time()
                         lasttimes = 0
                         time_out = 15
@@ -386,18 +386,18 @@ function sampev.onServerMessage(color, text)
                             wait(0)
                             active_forma = true
                             if stop_forma then
-                                message("Команду выполнил другой администратор.")
+                                message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                                 stop_forma = false
                                 break
                             end
                             if lasttimes == time_out then
-                                message("Время ожидания истекло.")
+                                message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                             end
                             local first_name, last_name = string.match(adm_name, "(%a)%a+_(%a+)")
                             local adm_name = string.match(adm_name, "%a+")
                             if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                                 adm_nick = first_name.. ". "..last_name
-                                new_text_msg = msg_text .. " • " ..adm_nick
+                                new_text_msg = msg_text .. " вЂў " ..adm_nick
                                 sampSendChat("/msg "..new_text_msg)
                                 active_forma = false
                                 break
@@ -414,9 +414,9 @@ function sampev.onServerMessage(color, text)
                 lua_thread.create(function()
                     wait(100)
                     adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                    text = string.format("Администратор %s[%d] хочет кикнуть {FFD700}%s[%d] {FFFFFF}без лишнего шума.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                    text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГЄГЁГЄГ­ГіГІГј {FFD700}%s[%d] {FFFFFF}ГЎГҐГ§ Г«ГЁГёГ­ГҐГЈГ® ГёГіГ¬Г .", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                     message(text)
-                    message("Нажмите клавишу подтверждения.")
+                    message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                     lasttime = os.time()
                     lasttimes = 0
                     time_out = 15
@@ -426,18 +426,18 @@ function sampev.onServerMessage(color, text)
                         wait(0)
                         active_forma = true
                         if stop_forma then
-                            message("Команду выполнил другой администратор.")
+                            message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                             stop_forma = false
                             break
                         end
                         if lasttimes == time_out then
-                            message("Время ожидания истекло.")
+                            message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                         end
                         if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                             sampSendChat("/skick "..adm_chat_cmd_player_id)
                             wait(200)
-                            sampSendChat(string.format("/a %s, команда применена.", adm_name))
-                            --sampSendChat("/ans "..adm_chat_cmd_player_id.." Наказание выдано по просьбе администратора "..adm_name..".")
+                            sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
+                            --sampSendChat("/ans "..adm_chat_cmd_player_id.." ГЌГ ГЄГ Г§Г Г­ГЁГҐ ГўГ»Г¤Г Г­Г® ГЇГ® ГЇГ°Г®Г±ГјГЎГҐ Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°Г  "..adm_name..".")
                             active_forma = false
                             break
                         end
@@ -453,9 +453,9 @@ function sampev.onServerMessage(color, text)
                 lua_thread.create(function()
                     wait(100)
                     adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                    text = string.format("Администратор %s[%d] хочет снять затычку с игрока {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                    text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ Г±Г­ГїГІГј Г§Г ГІГ»Г·ГЄГі Г± ГЁГЈГ°Г®ГЄГ  {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                     message(text)
-                    message("Нажмите клавишу подтверждения.")
+                    message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                     lasttime = os.time()
                     lasttimes = 0
                     time_out = 15
@@ -465,17 +465,17 @@ function sampev.onServerMessage(color, text)
                         wait(0)
                         active_forma = true
                         if stop_forma then
-                            message("Команду выполнил другой администратор.")
+                            message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                             stop_forma = false
                             break
                         end
                         if lasttimes == time_out then
-                            message("Время ожидания истекло.")
+                            message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                         end
                         if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                             sampSendChat("/unmute "..adm_chat_cmd_player_id)
                             wait(200)
-                            sampSendChat(string.format("/a %s, команда применена.", adm_name))
+                            sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
                             active_forma = false
                             break
                         end
@@ -490,9 +490,9 @@ function sampev.onServerMessage(color, text)
                 active_forma = true
                 lua_thread.create(function()
                     wait(100)
-                    text = string.format("Администратор %s[%d] хочет разбанить игрока {ffd700}%s{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name)
+                    text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ Г°Г Г§ГЎГ Г­ГЁГІГј ГЁГЈГ°Г®ГЄГ  {ffd700}%s{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name)
                     message(text)
-                    message("Нажмите клавишу подтверждения.")
+                    message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                     lasttime = os.time()
                     lasttimes = 0
                     time_out = 15
@@ -502,17 +502,17 @@ function sampev.onServerMessage(color, text)
                         wait(0)
                         active_forma = true
                         if stop_forma then
-                            message("Команду выполнил другой администратор.")
+                            message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                             stop_forma = false
                             break
                         end
                         if lasttimes == time_out then
-                            message("Время ожидания истекло.")
+                            message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                         end
                         if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                             sampSendChat("/unban "..adm_chat_cmd_player_name)
                             wait(200)
-                            sampSendChat(string.format("/a %s, команда применена.", adm_name))
+                            sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
                             active_forma = false
                             break
                         end
@@ -527,9 +527,9 @@ function sampev.onServerMessage(color, text)
                 active_forma = true
                 lua_thread.create(function()
                     wait(100)
-                    text = string.format("Администратор %s[%d] хочет разбанить игрока {ffd700}%s{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name)
+                    text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ Г°Г Г§ГЎГ Г­ГЁГІГј ГЁГЈГ°Г®ГЄГ  {ffd700}%s{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name)
                     message(text)
-                    message("Нажмите клавишу подтверждения.")
+                    message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                     lasttime = os.time()
                     lasttimes = 0
                     time_out = 15
@@ -539,17 +539,17 @@ function sampev.onServerMessage(color, text)
                         wait(0)
                         active_forma = true
                         if stop_forma then
-                            message("Команду выполнил другой администратор.")
+                            message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                             stop_forma = false
                             break
                         end
                         if lasttimes == time_out then
-                            message("Время ожидания истекло.")
+                            message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                         end
                         if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                             sampSendChat("/unwarn "..adm_chat_cmd_player_name)
                             wait(200)
-                            sampSendChat(string.format("/a %s, команда применена.", adm_name))
+                            sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
                             active_forma = false
                             break
                         end
@@ -565,9 +565,9 @@ function sampev.onServerMessage(color, text)
                 lua_thread.create(function()
                     wait(100)
                     adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                    text = string.format("Администратор %s[%d] хочет выпустить из тюрьмы игрока {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                    text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГўГ»ГЇГіГ±ГІГЁГІГј ГЁГ§ ГІГѕГ°ГјГ¬Г» ГЁГЈГ°Г®ГЄГ  {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                     message(text)
-                    message("Нажмите клавишу подтверждения.")
+                    message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                     lasttime = os.time()
                     lasttimes = 0
                     time_out = 15
@@ -577,17 +577,17 @@ function sampev.onServerMessage(color, text)
                         wait(0)
                         active_forma = true
                         if stop_forma then
-                            message("Команду выполнил другой администратор.")
+                            message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                             stop_forma = false
                             break
                         end
                         if lasttimes == time_out then
-                            message("Время ожидания истекло.")
+                            message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                         end
                         if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                             sampSendChat("/unprison "..adm_chat_cmd_player_id)
                             wait(200)
-                            sampSendChat(string.format("/a %s, команда применена.", adm_name))
+                            sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
                             active_forma = false
                             break
                         end
@@ -603,9 +603,9 @@ function sampev.onServerMessage(color, text)
                 lua_thread.create(function()
                     wait(100)
                     adm_chat_cmd_player_name = sampGetPlayerNickname(tonumber(adm_chat_cmd_player_id))
-                    text = string.format("Администратор %s[%d] хочет выпустить из тюрьмы игрока {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
+                    text = string.format("ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г° %s[%d] ГµГ®Г·ГҐГІ ГўГ»ГЇГіГ±ГІГЁГІГј ГЁГ§ ГІГѕГ°ГјГ¬Г» ГЁГЈГ°Г®ГЄГ  {ffd700}%s[%d]{ffffff}.", adm_name, adm_id, adm_chat_cmd_player_name, adm_chat_cmd_player_id)
                     message(text)
-                    message("Нажмите клавишу подтверждения.")
+                    message("ГЌГ Г¦Г¬ГЁГІГҐ ГЄГ«Г ГўГЁГёГі ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤ГҐГ­ГЁГї.")
                     lasttime = os.time()
                     lasttimes = 0
                     time_out = 15
@@ -615,17 +615,17 @@ function sampev.onServerMessage(color, text)
                         wait(0)
                         active_forma = true
                         if stop_forma then
-                            message("Команду выполнил другой администратор.")
+                            message("ГЉГ®Г¬Г Г­Г¤Гі ГўГ»ГЇГ®Г«Г­ГЁГ« Г¤Г°ГіГЈГ®Г© Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°.")
                             stop_forma = false
                             break
                         end
                         if lasttimes == time_out then
-                            message("Время ожидания истекло.")
+                            message("Г‚Г°ГҐГ¬Гї Г®Г¦ГЁГ¤Г Г­ГЁГї ГЁГ±ГІГҐГЄГ«Г®.")
                         end
                         if isKeyJustPressed(VK_K) and not sampIsChatInputActive() and not sampIsDialogActive() then
                             sampSendChat("/unprison "..adm_chat_cmd_player_id)
                             wait(200)
-                            sampSendChat(string.format("/a %s, команда применена.", adm_name))
+                            sampSendChat(string.format("/a %s, ГЄГ®Г¬Г Г­Г¤Г  ГЇГ°ГЁГ¬ГҐГ­ГҐГ­Г .", adm_name))
                             active_forma = false
                             break
                         end
