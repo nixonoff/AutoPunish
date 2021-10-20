@@ -37,15 +37,14 @@ function main()
 	end)
     sampRegisterChatCommand("getcar", getcar)
 
+    message("Written by {FFA500}Anton Nixon{ffffff}. Проверить лог обновлений - {FFA500}/sinfo{ffffff}.")
+
     downloadUrlToFile(update_url, update_path, function (id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateini = inicfg.load(nil, update_path)
             if tonumber(updateini.info.vers) > script_vers then
                 message("Найдено обновление. Версия:{FFA500} "..updateini.info.vers_text)
                 update_state = true
-            end
-            if tonumber(updateini.info.vers) <= script_vers and not update_state then
-                message("Written by {FFA500}Anton Nixon{ffffff}. Проверить лог обновлений - {FFA500}/sinfo{ffffff}.")
             end
             os.remove(update_path)
         end
